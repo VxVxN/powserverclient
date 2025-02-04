@@ -1,0 +1,22 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile_server
+    ports:
+      - "8081:8081"
+    networks:
+      - wisdom_network
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile_client
+    depends_on:
+      - server
+    networks:
+      - wisdom_network
+
+networks:
+  wisdom_network:
+    driver: bridge
